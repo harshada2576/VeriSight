@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt6.QtGui import QIcon
-from views.ui.login.ui import Ui_MainWindow 
+from views.ui  import Ui_MainWindow 
 from services.auth_service import get_user_by_email
 from utils.path import absolute_path # Your robust path utility
 
