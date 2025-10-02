@@ -10,7 +10,7 @@ def get_base_dir():
     """
     if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
         # Running as a PyInstaller, cx_Freeze, etc., executable
-        return Path(sys._MEIPIPASS).resolve()
+        return Path(sys._MEIPASS).resolve()
     else:
         # Running from source code (e.g., 'python main.py')
         # We assume this script is two levels deep (utils/paths.py) from the root.
