@@ -1,201 +1,121 @@
-<<<<<<< HEAD
-OptiRupe
-OptiRupe is a desktop-based personal finance and expense management application designed to help users effectively track and optimize their spending and financial goals.
 
-The name "OptiRupe" is a portmanteau of Optimize and Rupee (₹), reflecting its purpose to help Indian users optimize their finances.
+```markdown
+# 💰 OptiRupe: Desktop Finance Manager
 
-🚀 Key Features
-User Authentication: Secure login and user management system.
+**OptiRupe** is a desktop-based personal finance and expense management application designed to help users **track, analyze, and optimize** their spending and achieve financial goals.
 
-Data Tracking: Functionality to track financial data, including products or assets (inferred from models/product and seed_data.py).
+The name **OptiRupe** is a portmanteau of **Optimize** and **Rupee (₹)**, reflecting its core purpose: helping Indian users make smarter financial decisions.
 
-Robust Data Storage: Utilizes PostgreSQL for reliable and secure data persistence.
+---
 
-Database Seeding: Initial data can be loaded easily using a dedicated seeding script.
+## 🚀 Key Features
 
-Intuitive Desktop Interface: Built as a standalone desktop application for a fluid user experience (indicated by views/ui/login.ui and project scope).
+- **🔐 User Authentication** – Secure login and user management system, backed by the `auth_service.py` service layer.
+- **📊 Data Tracking** – Functionality to track income, expenses, products, and assets (inferred from `models/product` and `seed_data.py`).
+- **🗄️ Robust Storage** – Uses **PostgreSQL** for secure and reliable persistence, configured via `.env`.
+- **🌱 Database Seeding** – Easily load initial data using the `data/seed_data.py` script.
+- **🖥️ Intuitive Desktop Interface** – Built as a standalone desktop app using a UI definition file for the login screen.
 
-🛠️ Technology Stack
-Backend Language: Python
+---
 
-Database: PostgreSQL
+## 🛠️ Technology Stack
 
-Database ORM: SQLAlchemy
+| Component            | Technology                  |
+|----------------------|-----------------------------|
+| **Backend Language** | Python                      |
+| **Database**         | PostgreSQL                  |
+| **ORM**              | SQLAlchemy                  |
+| **GUI Framework**    | Likely PyQt / PySide        |
 
-GUI Framework: Likely a Python desktop framework like PyQt or PySide (inferred from .ui file and project type)
+---
 
-💻 Setup and Installation
-Follow these steps to get your local copy of OptiRupe up and running.
+## ⚙️ Installation & Setup
 
-1. Prerequisites
-Python (3.x recommended)
+Follow these steps to set up OptiRupe locally:
 
-PostgreSQL installed and running
+### 1. Prerequisites
 
-2. Clone the Repository
-Bash
+- Python **3.x** (recommended)
+- PostgreSQL (installed & running)
 
+### 2. Clone the Repository
+
+```bash
 git clone https://github.com/harshada2576/optirupe.git
 cd optirupe
-3. Environment Setup
-It is highly recommended to use a virtual environment:
+```
 
-Bash
+### 3. Setup Virtual Environment
 
+```bash
 python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-4. Install Dependencies
-The project uses psycopg2 for PostgreSQL connectivity.
+# Activate environment
+source venv/bin/activate    # On Linux/Mac
+# venv\Scripts\activate     # On Windows
+```
 
-Bash
+### 4. Install Dependencies
 
+```bash
 pip install -r requirements.txt
-# Note: You may need to install other dependencies for the GUI framework (e.g., PyQt5/PySide2)
-5. Database Configuration
-Create a file named .env in the root directory to store your database credentials.
+# The project requires psycopg2 for PostgreSQL.
+# Note: Install additional GUI framework dependencies if required (e.g., PyQt5 / PySide2)
+```
 
-The current configuration points to a local PostgreSQL instance.
+### 5. Configure Database
 
-Replace yourpassword with your actual PostgreSQL password.
+Create a `.env` file in the project root:
 
-.env
-
+```
 DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/opti_rupe
-6. Initialize the Database
-Run the main file to create the necessary tables (users, products, etc.) defined in your models:
+```
 
-Bash
+Replace `yourpassword` with your actual PostgreSQL password.
 
+### 6. Initialize Database
+
+```bash
 python main.py
-7. Seed Initial Data (Optional)
-If you have a seed_data.json file, you can populate your database with initial data:
+```
 
-Bash
+This runs `main.py` to create all required database tables (users, products, etc.).
 
+### 7. (Optional) Seed Initial Data
+
+```bash
 python data/seed_data.py
-▶️ Running the Application
-(This step will depend on your chosen GUI framework. Assuming a standard entry point.)
+```
 
-Run the main application file:
+### ▶️ Running the Application
 
-Bash
+Run the main application file to start the GUI:
 
-# Example command, adjust based on your final main application file
+```bash
 python app.py
-(If your main application logic is in main.py, the command would be python main.py, but it currently only handles database creation.)
+```
 
-🖼️ Logo & Icon
-The project logo and icon can be found in the assets/ directory:
+> Note: If your main GUI loop is in `main.py`, use `python main.py` instead.
 
-Logo: assets/logo.png
+---
 
-Icon: assets/icon.jpeg
+## 📂 Project Structure Breakdown
 
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+| Folder / File     | Purpose                        | Key Files                          |
+|-------------------|--------------------------------|------------------------------------|
+| Root Files        | Configuration & Setup          | `database.py`, `main.py`, `.env`, `requirements.txt`, `LICENSE` |
+| `assets/`         | Static Media & Branding        | `logo.png`, `icon.jpeg`            |
+| `data/`           | Initial Data                   | `seed_data.py`                     |
+| `models/`         | Database Schemas (ORM)         | `user.py`                          |
+| `services/`       | Business Logic Layer           | `auth_service.py`                  |
+| `views/ui/`       | User Interface Definitions     | `login.ui`                         |
 
-Copyright (c) 2025 Harshada Avhad.
+---
 
-🧑‍💻 Author
-Harshada Avhad
-=======
-OptiRupe
-OptiRupe is a desktop-based personal finance and expense management application designed to help users effectively track and optimize their spending and financial goals.
+## 📄 License & Author
 
-The name "OptiRupe" is a portmanteau of Optimize and Rupee (₹), reflecting its purpose to help Indian users optimize their finances.
+This project is licensed under the **MIT License**.
 
-🚀 Key Features
-User Authentication: Secure login and user management system.
+© 2025 Harshada Avhad
 
-Data Tracking: Functionality to track financial data, including products or assets (inferred from models/product and seed_data.py).
-
-Robust Data Storage: Utilizes PostgreSQL for reliable and secure data persistence.
-
-Database Seeding: Initial data can be loaded easily using a dedicated seeding script.
-
-Intuitive Desktop Interface: Built as a standalone desktop application for a fluid user experience (indicated by views/ui/login.ui and project scope).
-
-🛠️ Technology Stack
-Backend Language: Python
-
-Database: PostgreSQL
-
-Database ORM: SQLAlchemy
-
-GUI Framework: Likely a Python desktop framework like PyQt or PySide (inferred from .ui file and project type)
-
-💻 Setup and Installation
-Follow these steps to get your local copy of OptiRupe up and running.
-
-1. Prerequisites
-Python (3.x recommended)
-
-PostgreSQL installed and running
-
-2. Clone the Repository
-Bash
-
-git clone https://github.com/harshada2576/optirupe.git
-cd optirupe
-3. Environment Setup
-It is highly recommended to use a virtual environment:
-
-Bash
-
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-4. Install Dependencies
-The project uses psycopg2 for PostgreSQL connectivity.
-
-Bash
-
-pip install -r requirements.txt
-# Note: You may need to install other dependencies for the GUI framework (e.g., PyQt5/PySide2)
-5. Database Configuration
-Create a file named .env in the root directory to store your database credentials.
-
-The current configuration points to a local PostgreSQL instance.
-
-Replace yourpassword with your actual PostgreSQL password.
-
-.env
-
-DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/opti_rupe
-6. Initialize the Database
-Run the main file to create the necessary tables (users, products, etc.) defined in your models:
-
-Bash
-
-python main.py
-7. Seed Initial Data (Optional)
-If you have a seed_data.json file, you can populate your database with initial data:
-
-Bash
-
-python data/seed_data.py
-▶️ Running the Application
-(This step will depend on your chosen GUI framework. Assuming a standard entry point.)
-
-Run the main application file:
-
-Bash
-
-# Example command, adjust based on your final main application file
-python app.py
-(If your main application logic is in main.py, the command would be python main.py, but it currently only handles database creation.)
-
-🖼️ Logo & Icon
-The project logo and icon can be found in the assets/ directory:
-
-Logo: assets/logo.png
-
-Icon: assets/icon.jpeg
-
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Copyright (c) 2025 Harshada Avhad.
-
-🧑‍💻 Author
-Harshada Avhad
->>>>>>> 992a25ec062ae07fcc55e69a5f2b9004818843c5
+**Author**: Harshada Avhad, Developer & Creator of OptiRupe
+```
