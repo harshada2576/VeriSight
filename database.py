@@ -6,7 +6,7 @@ import os
 from .utils.paths import absolute_path
 ENV_PATH = absolute_path(".env")
 
-load_dotenv()
+load_dotenv(ENV_PATH)
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
