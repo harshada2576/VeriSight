@@ -1,2 +1,6 @@
 psycopg2
+# Add to requirements.txt
+PyQt6
+# OR
+PySide6
 
