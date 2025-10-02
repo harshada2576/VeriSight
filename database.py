@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
 import os
-from .utils.paths import absolute_path
+from .utils.path import absolute_path
 ENV_PATH = absolute_path(".env")
 
 load_dotenv(ENV_PATH)
