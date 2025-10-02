@@ -1,7 +1,7 @@
 import json
 from database import SessionLocal
 from models.product import Product
-from ..utils.paths import absolute_path 
+from ..utils.path import absolute_path 
 
 JSON_PATH = absolute_path("data", "seed_data.json") 
 
