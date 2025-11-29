@@ -1,31 +1,53 @@
 # app.py
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 import os
+import uuid
+from fastapi import FastAPI, UploadFile, File, HTTPException, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
+from starlette.responses import JSONResponse
+from src import db, models
+from config import UPLOAD_DIR, ALLOWED_EXT, MAX_UPLOAD_BYTES
+from src.services_preprocess import process_job_background
 
 
-# ensure package paths
-os.makedirs('data/videos', exist_ok=True)
-os.makedirs('data/artifacts', exist_ok=True)
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
-app = FastAPI(title="VeriSight Minimal")
+app = FastAPI(title="VeriSight Prototype (SQLite + Local Storage)")
 
 
-app.add_middleware(
-CORSMiddleware,
-allow_origins=["*"],
-allow_credentials=True,
-allow_methods=["*"],
-allow_headers=["*"],
-)
+# Mount static serving for evidence and previews
+app.mount("/storage", StaticFiles(directory=UPLOAD_DIR), name="storage")
 
 
-# include routers
-from routes import JobsRouter # local import after app created
-app.include_router(JobsRouter.router, prefix="", tags=["jobs"])
+@app.on_event("startup")
+def startup():
+db.init_db() # create tables for prototype
 
 
-@app.get("/health")
-def health():
-return {"status": "ok"}
+@app.post("/upload", status_code=201)
+async def upload_video(background_tasks: BackgroundTasks, file: UploadFile = File(...), user_id: str = "dev"):
+filename = file.filename
+ext = os.path.splitext(filename)[1].lower()
+if ext not in ALLOWED_EXT:
+raise HTTPException(status_code=400, detail="Unsupported video format")
+contents = await file.read()
+if len(contents) > MAX_UPLOAD_BYTES:
+raise HTTPException(status_code=413, detail="File too large")
+job_id = uuid.uuid4().hex
+job_dir = os.path.join(UPLOAD_DIR, "jobs", job_id)
+os.makedirs(job_dir, exist_ok=True)
+saved_path = os.path.join(job_dir, f"upload{ext}")
+with open(saved_path, "wb") as f:
+f.write(contents)
+
+
+# create DB job record
+job = models.Job(id=job_id, owner=user_id, s3_key=None, local_path=saved_path, state="created", metadata={})
+db.save_job(job)
+
+
+# schedule background processing
+background_tasks.add_task(process_job_background, job_id)
+
+
+return JSONResponse({"job_id": job_id, "upload_path": f"/storage/jobs/{job_id}/upload{ext}"})
