@@ -1,4 +1,3 @@
-# src/utils_ffmpeg.py
 import subprocess, shlex, json, os
 
 def ffprobe_metadata(path):
@@ -20,11 +19,9 @@ def make_preview_clip(path, out_path, duration=10):
     subprocess.run(cmd, shell=True, check=True)
 
 def detect_corruption(path):
-    # Very naive: try ffmpeg -v error to transcode 1s and check exit
     try:
         cmd = f"ffmpeg -v error -i {shlex.quote(path)} -t 1 -f null -"
         p = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=20)
         return p.returncode != 0
     except Exception:
         return True
-

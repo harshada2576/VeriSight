@@ -1,11 +1,10 @@
-# src/services_preprocess.py
-import os
-import traceback
+import os, traceback
 from src.db import SessionLocal
 from src.models import Job, update_job_state, save_job_result
 from src.utils_ffmpeg import ffprobe_metadata, extract_frames, make_preview_clip, detect_corruption
 
-STORAGE_ROOT = os.path.join(os.path.dirname(__file__), "..", "storage")
+BASE = os.path.dirname(os.path.dirname(__file__))
+STORAGE_ROOT = os.path.join(BASE, "storage")
 
 def process_job_background(job_id: str):
     try:
@@ -36,7 +35,7 @@ def process_job_background(job_id: str):
 
         update_job_state(job_id, "inference", extra={"frames_dir": frames_dir})
 
-        # naive "inference" for prototype: random heuristic
+        # naive "inference" for prototype
         result = {
             "score": 0.42,
             "confidence": 0.7,
@@ -49,4 +48,3 @@ def process_job_background(job_id: str):
     except Exception as e:
         traceback.print_exc()
         update_job_state(job_id, "failed", extra={"error": str(e)})
-

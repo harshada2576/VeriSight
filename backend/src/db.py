@@ -1,4 +1,3 @@
-# src/db.py
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from config import DATABASE_URL
@@ -12,4 +11,3 @@ def init_db():
 
 def get_session():
     return SessionLocal()
-
