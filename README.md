@@ -64,7 +64,8 @@ Frontend UI reference: `verisight-frontend/src/pages/public/Home.jsx`
 *Replace with project logo*
 
 ```
-[ PLACE YOUR SVG/PNG LOGO HERE ]
+[logo](https://github.com/user-attachments/assets/7fb2a0a7-2eac-460c-8fec-ec23138be1a8)
+
 ```
 
 ---
