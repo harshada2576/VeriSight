@@ -1,6 +1,6 @@
 ---
 
-## 🚀 **VeriSight — Agentic AI Fake Video Detection **
+## 🚀 VeriSight — Agentic AI Fake Video Detection
 
 A prototype full-stack system for **deepfake detection, evidence packaging, and cryptographic verification**.
 This monorepo contains a **FastAPI backend** and a **React + Vite frontend**, integrated as an autonomous analysis and review pipeline.
@@ -61,8 +61,6 @@ Frontend UI reference: `verisight-frontend/src/pages/public/Home.jsx`
 
 ## 🔰 **Logo**
 
-*Replace with project logo*
-
 ```
 [logo](https://github.com/user-attachments/assets/7fb2a0a7-2eac-460c-8fec-ec23138be1a8)
 
@@ -94,7 +92,7 @@ Frontend UI reference: `verisight-frontend/src/pages/public/Home.jsx`
 
 ## 🎥 **Demo**
 
-📁 Google Drive Demo Video (placeholder)
+📁 Google Drive Demo Video 
 
 > **Link:** *INSERT HERE*
 
