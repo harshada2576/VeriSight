@@ -1,46 +1,43 @@
 ---
-
 ## 🚀 VeriSight — Agentic AI Fake Video Detection
 
 A prototype full-stack system for **deepfake detection, evidence packaging, and cryptographic verification**.
 This monorepo contains a **FastAPI backend** and a **React + Vite frontend**, integrated as an autonomous analysis and review pipeline.
-
 ---
 
 ## 📚 **Table of Contents**
 
-* Overview
-* Badges
-* Logo
-* Quick TL;DR
-* Key Features
-* Demo
-* Installation
-* Run Locally
-* Environment Variables
-* Configuration & Proxy
-* Architecture & Tech Stack
-* Usage / Examples
-* API Reference
-* How It Works (Pipeline)
-* Preprocessing & Detector
-* Verification Pack & Cryptography
-* Evidence Viewers
-* Testing
-* Deployment
-* Roadmap
-* Contributing
-* License
-* Authors
-* Acknowledgements
-* FAQ
-* Support / Contact
-* Related
-* Troubleshooting
-* Changelog
-* Optimizations / Lessons Learned
-* Used By / Integrations
-* Custom Sections
+- Overview
+- Badges
+- Logo
+- Quick TL;DR
+- Key Features
+- Installation
+- Run Locally
+- Environment Variables
+- Configuration & Proxy
+- Architecture & Tech Stack
+- Usage / Examples
+- API Reference
+- How It Works (Pipeline)
+- Preprocessing & Detector
+- Verification Pack & Cryptography
+- Evidence Viewers
+- Testing
+- Deployment
+- Roadmap
+- Contributing
+- License
+- Authors
+- Acknowledgements
+- FAQ
+- Support / Contact
+- Related
+- Troubleshooting
+- Changelog
+- Optimizations / Lessons Learned
+- Used By / Integrations
+- Custom Sections
 
 ---
 
@@ -81,20 +78,12 @@ Frontend UI reference: `verisight-frontend/src/pages/public/Home.jsx`
 
 ## ✨ **Key Features**
 
-* Multimodal video analysis (visual, audio, temporal)
-* Frame extraction & optical-flow-based analytics
-* SSIM/MSE anomaly scoring + robust z-score voting
-* Cryptographically signed **verification pack**
-* Evidence review UI: frames, heatmaps, spectrograms
-* Upload via file or URL with progress tracking
-
----
-
-## 🎥 **Demo**
-
-📁 Google Drive Demo Video 
-
-> **Link:** *INSERT HERE*
+- Multimodal video analysis (visual, audio, temporal)
+- Frame extraction & optical-flow-based analytics
+- SSIM/MSE anomaly scoring + robust z-score voting
+- Cryptographically signed **verification pack**
+- Evidence review UI: frames, heatmaps, spectrograms
+- Upload via file or URL with progress tracking
 
 ---
 
@@ -225,25 +214,25 @@ Signature block component: `SignatureBlock.jsx`
 
 ## 📦 **Deployment**
 
-* `npm run build` for frontend
-* Serve backend with `gunicorn + uvicorn`
-* Ensure `ffmpeg` installed on host
+- `npm run build` for frontend
+- Serve backend with `gunicorn + uvicorn`
+- Ensure `ffmpeg` installed on host
 
 ---
 
 ## 🛣 **Roadmap**
 
-* ML-based detector replacing heuristics
-* Celery/RQ workers + S3 storage
-* Blockchain anchor for audit logs
-* Enterprise SSO & roles
+- ML-based detector replacing heuristics
+- Celery/RQ workers + S3 storage
+- Blockchain anchor for audit logs
+- Enterprise SSO & roles
 
 ---
 
 ## 💼 **Contributing**
 
-* ESLint + Prettier + Black/flake8 recommended
-* Add PR templates and CI testing
+- ESLint + Prettier + Black/flake8 recommended
+- Add PR templates and CI testing
 
 ---
 
@@ -255,7 +244,7 @@ Signature block component: `SignatureBlock.jsx`
 
 ## 👥 **Authors**
 
-*Add contributors list here*
+_Add contributors list here_
 
 ---
 
@@ -276,27 +265,27 @@ FFmpeg • OpenCV • scikit-image • FastAPI • React • Vite
 
 ## 🆘 **Support / Contact**
 
-`privacy@verisight.ai` *(placeholder)*
+`privacy@verisight.ai` _(placeholder)_
 
 ---
 
 ## 🔧 **Troubleshooting**
 
-* FFmpeg errors → ensure installed & in PATH
-* Preview fails → review `utils_ffmpeg.py`
+- FFmpeg errors → ensure installed & in PATH
+- Preview fails → review `utils_ffmpeg.py`
 
 ---
 
 ## 🧠 **Optimizations / Lessons Learned**
 
-* Downscaled grayscale frames improve temporal anomaly precision
-* Fusion of MSE/SSIM/flow metrics yields stable detection
+- Downscaled grayscale frames improve temporal anomaly precision
+- Fusion of MSE/SSIM/flow metrics yields stable detection
 
 ---
 
 ## 🧩 **Used By / Integrations**
 
-* Coming Soon (Cloudflare / Stripe etc.)
+- Coming Soon (Cloudflare / Stripe etc.)
 
 ---
 
@@ -307,5 +296,3 @@ Add brand-specific or hackathon-specific notes here
 ---
 
 ### 🌟 Done!
-
-
