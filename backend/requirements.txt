@@ -12,3 +12,6 @@ matplotlib
 librosa
 soundfile
 pytest
+opencv-python
+scikit-image
+

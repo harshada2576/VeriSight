@@ -1,0 +1,137 @@
+# ai_video_detector.py
+import cv2
+import numpy as np
+from skimage.metrics import structural_similarity as ssim
+from pathlib import Path
+
+def resize_gray(frame, width=640):
+    h, w = frame.shape[:2]
+    scale = width / w
+    new_h = int(h * scale)
+    frame = cv2.resize(frame, (width, new_h), interpolation=cv2.INTER_AREA)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    return gray
+
+def mse(a, b):
+    return float(np.mean((a.astype("float32") - b.astype("float32")) ** 2))
+
+def compute_optical_flow_mag(prev_gray, gray):
+    # Farneback optical flow
+    flow = cv2.calcOpticalFlowFarneback(prev_gray, gray,
+                                        None, 0.5, 3, 15, 3, 5, 1.2, 0)
+    mag, ang = cv2.cartToPolar(flow[...,0], flow[...,1])
+    return float(np.mean(mag)), mag  # mean magnitude and full map
+
+def robust_zscores(arr):
+    med = np.median(arr)
+    mad = np.median(np.abs(arr - med))
+    if mad == 0:
+        mad = 1e-6
+    z = 0.6745 * (arr - med) / mad
+    return z
+
+def detect_shot_boundaries(paths_or_video, thresh=0.5):
+    # quick histogram-diff shot detection (works reasonably for demo)
+    # when input is a cv2.VideoCapture object, read frames; if a path, open it.
+    cap = cv2.VideoCapture(str(paths_or_video))
+    prev_hist = None
+    boundaries = []  # frame indices of shot starts
+    idx = 0
+    while True:
+        ok, frame = cap.read()
+        if not ok:
+            break
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        hist = cv2.calcHist([hsv], [0,1], None, [50,60], [0,180,0,256])
+        cv2.normalize(hist, hist)
+        if prev_hist is not None:
+            diff = cv2.compareHist(prev_hist, hist, cv2.HISTCMP_BHATTACHARYYA)
+            # larger diff => likely cut
+            if diff > thresh:
+                boundaries.append(idx)
+        prev_hist = hist
+        idx += 1
+    cap.release()
+    return boundaries
+
+def analyze_video(path, width=640, ssim_window=5, z_threshold=6):
+    cap = cv2.VideoCapture(str(path))
+    ok, prev = cap.read()
+    if not ok:
+        raise RuntimeError("cannot read video")
+    prev_gray = resize_gray(prev, width)
+    frame_idx = 1
+    mses = []
+    ssims = []
+    flow_mags = []
+    anomalies = []
+
+    while True:
+        ok, frame = cap.read()
+        if not ok:
+            break
+        gray = resize_gray(frame, width)
+
+        # per-frame metrics
+        m = mse(prev_gray, gray)
+        s = ssim(prev_gray, gray)
+        flow_mean, _ = compute_optical_flow_mag(prev_gray, gray)
+
+        mses.append(m)
+        ssims.append(s)
+        flow_mags.append(flow_mean)
+
+        prev_gray = gray
+        frame_idx += 1
+
+    cap.release()
+
+    # convert lists to numpy arrays
+    mses = np.array(mses)
+    ssims = np.array(ssims)
+    flow_mags = np.array(flow_mags)
+
+    # invert ssim so higher means more change
+    inv_ssim = 1.0 - ssims
+
+    # robust z-scores per metric
+    zm = robust_zscores(mses)
+    zs = robust_zscores(inv_ssim)
+    zf = robust_zscores(flow_mags * -1)  # low flow where should be high -> suspicious; invert
+
+    # combine scores: normalized votes
+    combined = ( (zm > z_threshold).astype(int) +
+                 (zs > z_threshold).astype(int) +
+                 (zf > z_threshold).astype(int) )
+
+    # suspicious frames where >=2 signals trigger
+    suspicious_idx = np.where(combined >= 2)[0].tolist()
+
+    # produce ranges (consecutive frames grouped)
+    ranges = []
+    if suspicious_idx:
+        start = suspicious_idx[0]
+        prev_i = start
+        for i in suspicious_idx[1:]:
+            if i == prev_i + 1:
+                prev_i = i
+                continue
+            else:
+                ranges.append((start, prev_i))
+                start = i
+                prev_i = i
+        ranges.append((start, prev_i))
+
+    # score: fraction of frames suspicious (rough)
+    score = float(len(suspicious_idx) / max(1, len(mses)))
+
+    return {
+        "score": score,
+        "suspicious_ranges": ranges,
+        "metrics": {
+            "mse": mses.tolist(),
+            "inv_ssim": inv_ssim.tolist(),
+            "flow_mags": flow_mags.tolist()
+        }
+    }
+
