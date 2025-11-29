@@ -15,7 +15,6 @@ This monorepo contains a **FastAPI backend** and a **React + Vite frontend**, in
 * Quick TL;DR
 * Key Features
 * Demo
-* Screenshots
 * Installation
 * Run Locally
 * Environment Variables
@@ -97,17 +96,6 @@ Frontend UI reference: `verisight-frontend/src/pages/public/Home.jsx`
 📁 Google Drive Demo Video (placeholder)
 
 > **Link:** *INSERT HERE*
-
----
-
-## 🖼 **Screenshots**
-
-Add screenshots under `docs/screenshots/`
-
-```
-![Screenshot 1](docs/screenshots/screen1.png)
-![Screenshot 2](docs/screenshots/screen2.png)
-```
 
 ---
 
