@@ -1,6 +1,6 @@
 ---
 
-## 🚀 **VeriSight — Agentic AI Fake Video Detection (Monorepo)**
+## 🚀 **VeriSight — Agentic AI Fake Video Detection **
 
 A prototype full-stack system for **deepfake detection, evidence packaging, and cryptographic verification**.
 This monorepo contains a **FastAPI backend** and a **React + Vite frontend**, integrated as an autonomous analysis and review pipeline.
