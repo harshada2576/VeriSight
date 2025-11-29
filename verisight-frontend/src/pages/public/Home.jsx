@@ -131,13 +131,13 @@ const Home = () => {
             }}>
               <Button
                 variant="primary"
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/app/upload')}
                 style={{
                   padding: '16px 32px',
                   fontSize: '16px',
                 }}
               >
-                Login to Analyze
+                Upload Video
               </Button>
               <Button
                 variant="secondary"

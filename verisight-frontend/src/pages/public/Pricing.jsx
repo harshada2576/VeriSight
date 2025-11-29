@@ -13,8 +13,8 @@ const Pricing = () => {
       id: 'starter',
       name: 'Starter',
       tagline: 'Perfect for individuals',
-      monthlyPrice: 29,
-      yearlyPrice: 290,
+      monthlyPrice: 0,
+      yearlyPrice: 20,
       features: [
         '10 videos per month',
         'Basic AI analysis',
@@ -34,8 +34,8 @@ const Pricing = () => {
       id: 'professional',
       name: 'Professional',
       tagline: 'For businesses & professionals',
-      monthlyPrice: 99,
-      yearlyPrice: 990,
+      monthlyPrice: 49,
+      yearlyPrice: 490,
       features: [
         '100 videos per month',
         'Advanced AI analysis',

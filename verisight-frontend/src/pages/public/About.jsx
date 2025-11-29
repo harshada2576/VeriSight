@@ -162,58 +162,6 @@ const About = () => {
             </div>
           </Card>
 
-          {/* Timeline */}
-          <Card style={{ marginBottom: '32px' }}>
-            <div style={{ padding: '48px' }}>
-              <h2 style={{
-                fontSize: '32px',
-                fontWeight: '700',
-                color: '#FFFFFF',
-                textAlign: 'center',
-                marginBottom: '48px',
-              }}>
-                Our Journey
-              </h2>
-              <div style={{ display: 'grid', gap: '24px', maxWidth: '800px', margin: '0 auto' }}>
-                {[
-                  { year: '2022', title: 'Founded', description: 'VeriSight established by AI researchers and cybersecurity experts' },
-                  { year: '2023', title: 'Beta Launch', description: 'Successful pilot program with law enforcement agencies' },
-                  { year: '2024', title: 'Series A', description: 'Raised $15M to expand detection capabilities' },
-                  { year: '2025', title: 'Global Scale', description: 'Processing millions of videos monthly across 50+ countries' },
-                ].map((milestone, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      display: 'flex',
-                      gap: '24px',
-                      padding: '24px',
-                      background: '#0A1E3F',
-                      borderRadius: '12px',
-                      border: '1px solid rgba(53, 226, 255, 0.3)',
-                    }}
-                  >
-                    <div style={{
-                      fontSize: '24px',
-                      fontWeight: '700',
-                      color: '#35E2FF',
-                      minWidth: '80px',
-                    }}>
-                      {milestone.year}
-                    </div>
-                    <div>
-                      <h4 style={{ fontSize: '18px', fontWeight: '600', color: '#FFFFFF', marginBottom: '8px' }}>
-                        {milestone.title}
-                      </h4>
-                      <p style={{ fontSize: '14px', color: '#D8DDE3', lineHeight: '1.6' }}>
-                        {milestone.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Card>
-
           {/* CTA */}
           <Card style={{ marginBottom: '32px' }}>
             <div style={{ padding: '48px', textAlign: 'center' }}>
@@ -229,7 +177,7 @@ const About = () => {
                 Join thousands of organizations using VeriSight to ensure media authenticity
               </p>
               <Link
-                to="/register"
+                to="/app/upload"
                 style={{
                   display: 'inline-block',
                   padding: '14px 32px',
@@ -244,7 +192,7 @@ const About = () => {
                 onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
               >
-                Get Started Free
+                Upload Video Now
               </Link>
             </div>
           </Card>
